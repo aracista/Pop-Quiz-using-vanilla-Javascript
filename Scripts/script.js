@@ -56,6 +56,9 @@ var waktu = newCandidateAnswer;
    				document.querySelector(".modal-wrapper").style.display = "none";
    				passed.push(randomKandidat);
 				localStorage.setItem("passed", passed.toString());
+				var updateArray = arrayRemove(kandidat,randomKandidat);
+				console.log(updateArray);
+				localStorage.setItem("candidate", updateArray.toString());
 
   			});
 
