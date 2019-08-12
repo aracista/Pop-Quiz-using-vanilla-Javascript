@@ -43,11 +43,22 @@ var waktu = newCandidateAnswer;
 
 		var kandidat = localStorage.getItem("candidate");
 		kandidat = kandidat ? kandidat.split(',') : [];
+		var passed = localStorage.getItem("passed");
+		passed = passed ? passed.split(',') : [];
 		if(waktu == 0) {
-			var newTextNode = document.createTextNode(get_random(kandidat));
+			var randomKandidat = get_random(kandidat);
+			var newTextNode = document.createTextNode(randomKandidat);
 			var candidate = document.getElementById("candidate");
 			candidate.appendChild(newTextNode);
 			document.querySelector(".modal-wrapper").style.display = "flex";
+
+			correctButton.addEventListener("click", function(event){
+   				document.querySelector(".modal-wrapper").style.display = "none";
+   				passed.push(randomKandidat);
+				localStorage.setItem("passed", passed.toString());
+
+  			});
+
 		}
 		if (waktu > -1) {
 			document.getElementById("seconds-left").innerHTML = waktu;
@@ -96,9 +107,11 @@ beginButton.addEventListener("click", function(event){
      wrongButton.style.display = "inline";
   });
 
-  correctButton.addEventListener("click", function(event){
-   	document.querySelector(".modal-wrapper").style.display = "none";
-  });
+  function arrayRemove(array, value){
+  	return array.filter(function(element){
+  		return element != value;
+  	});
+  }
 
 
 oldList()
